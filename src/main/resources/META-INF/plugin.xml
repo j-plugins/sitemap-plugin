@@ -9,5 +9,13 @@
     <resource-bundle>messages.MyBundle</resource-bundle>
 
     <extensions defaultExtensionNs="com.intellij">
+        <fileType
+                name="Sitemap File"
+                implementationClass="com.github.xepozz.sitemap.SitemapFileType"
+                fieldName="INSTANCE"
+                language="XML"
+                patterns="sitemap*.xml;*sitemap.xml;*.sitemap.xml"
+                fileNamesCaseInsensitive="sitemap.xml"
+        />
     </extensions>
 </idea-plugin>
