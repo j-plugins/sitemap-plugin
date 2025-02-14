@@ -4,8 +4,15 @@
     <name>Sitemap</name>
     <vendor email="xepozz@list.ru" url="https://github.com/xepozz">Dmitrii Derepko (@xepozz)</vendor>
 
-    <depends>com.intellij.modules.platform</depends>
-
+<!--    <depends>com.intellij.modules.platform</depends>-->
+<!--    <depends>com.intellij.modules.database</depends>-->
+<!--    <depends>intellij.grid.types</depends>-->
+    <dependencies>
+<!--        <module name="intellij.grid.types"/>-->
+<!--        <plugin id="intellij.grid.impl" />-->
+        <plugin id="com.intellij.modules.platform" />
+        <plugin id="com.intellij.modules.database" />
+    </dependencies>
     <resource-bundle>messages.MyBundle</resource-bundle>
 
     <extensions defaultExtensionNs="com.intellij">
@@ -17,5 +24,14 @@
                 patterns="*sitemap*.xml"
                 fileNamesCaseInsensitive="sitemap.xml"
         />
+        <fileEditorProvider
+                id="sitemap editor" order="first"
+                implementation="com.github.xepozz.sitemap.editor.SitemapTableFileEditorProvider"/>
+
+        <database.datagrid.valueEditorTab implementation="com.github.xepozz.sitemap.editor.EditorValueEditorTab"/>
+
+        <registryKey
+                key="sitemap.open.as.tables.by.default" defaultValue="true"
+                description="Show sitemap as a table by default"/>
     </extensions>
 </idea-plugin>
