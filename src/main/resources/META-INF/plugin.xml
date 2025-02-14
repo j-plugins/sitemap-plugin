@@ -14,7 +14,7 @@
                 implementationClass="com.github.xepozz.sitemap.SitemapFileType"
                 fieldName="INSTANCE"
                 language="XML"
-                patterns="sitemap*.xml;*sitemap.xml;*.sitemap.xml"
+                patterns="*sitemap*.xml"
                 fileNamesCaseInsensitive="sitemap.xml"
         />
     </extensions>
