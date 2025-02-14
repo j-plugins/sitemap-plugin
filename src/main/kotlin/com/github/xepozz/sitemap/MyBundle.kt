@@ -1,4 +1,4 @@
-package com.github.xepozz.sitemapplugin
+package com.github.xepozz.sitemap
 
 import com.intellij.DynamicBundle
 import org.jetbrains.annotations.NonNls

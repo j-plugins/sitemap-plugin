@@ -1,6 +1,6 @@
 <!-- Keep a Changelog guide -> https://keepachangelog.com -->
 
-# sitemap-plugin Changelog
+# Sitemap Changelog
 
 ## [Unreleased]
 ### Added
