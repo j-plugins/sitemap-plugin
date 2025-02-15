@@ -3,13 +3,13 @@
      xmlns:xlink="http://www.w3.org/1999/xlink"
      width="14" height="14" viewBox="0 0 32 32">
     <g>
-        <circle cx="16" cy="16" r="14" fill="none" stroke="#59A869" stroke-width="2" stroke-linecap="round"/>
+        <circle cx="16" cy="16" r="14" fill="none" stroke="#499C54" stroke-width="2" stroke-linecap="round"/>
         <path d="M25,7l-8.053,5.125C16.642,12.05,16.328,12,16,12c-2.209,0-4,1.791-4,4
 		c0,0.328,0.05,0.642,0.125,0.947L7,25l8.053-5.125C15.358,19.95,15.672,20,16,20c2.209,0,4-1.791,4-4
 		c0-0.328-0.05-0.642-0.125-0.947L25,7z M16,18c-1.105,0-2-0.895-2-2c0-1.105,0.895-2,2-2s2,0.895,2,2C18,17.105,17.105,18,16,18z"
-              fill="#6E6E6E"/>
-        <circle cx="16" cy="16" r="2" fill="#59A869"/>
-        <path d="M17,27h-2v-2h2V27z M27,15h-2v2h2V15z" fill="#59A869"/>
-        <path d="M17,7h-2V5h2V7z M7,15H5v2h2V15z" fill="#59A869"/>
+              fill="#AFB1B3"/>
+        <circle cx="16" cy="16" r="2" fill="#499C54"/>
+        <path d="M17,27h-2v-2h2V27z M27,15h-2v2h2V15z" fill="#499C54"/>
+        <path d="M17,7h-2V5h2V7z M7,15H5v2h2V15z" fill="#499C54"/>
     </g>
 </svg>
