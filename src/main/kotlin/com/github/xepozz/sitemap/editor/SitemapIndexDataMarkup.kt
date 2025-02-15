@@ -106,7 +106,6 @@ class SitemapIndexDataMarkup(
                     ?.get(index) ?: return@forEach
                 xmlTag.delete()
             }
-            commitChanges(psiFile)
         }
 
         return true
@@ -122,7 +121,6 @@ class SitemapIndexDataMarkup(
 //            println("new child: ${newChild}")
             rootTag.addSubTag(newChild, false)
 //            println("rootTag after: ${rootTag.text}")
-            commitChanges(psiFile)
         }
 
         return true
@@ -147,7 +145,6 @@ class SitemapIndexDataMarkup(
 //            println("new child: ${newChild}")
             rootTag.addSubTag(newChild, false)
 //            println("rootTag after: ${rootTag.text}")
-            commitChanges(psiFile)
         }
 
         return true
@@ -198,8 +195,6 @@ class SitemapIndexDataMarkup(
                 }
 
                 println("xmlTag after: ${xmlTag.text}")
-
-                commitChanges(psiFile)
             }
         }
 
@@ -226,10 +221,4 @@ class SitemapIndexDataMarkup(
         session: DocumentDataHookUp.UpdateSession,
         p1: GridColumn
     ): Boolean = false
-
-
-    private fun commitChanges(psiFile: XmlFile) {
-        PsiDocumentManager.getInstance(psiFile.project)
-            .commitDocument(psiFile.fileDocument)
-    }
 }

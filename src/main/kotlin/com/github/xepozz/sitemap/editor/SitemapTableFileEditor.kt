@@ -3,6 +3,7 @@ package com.github.xepozz.sitemap.editor
 import com.intellij.database.csv.CsvFormatResolver
 import com.intellij.database.datagrid.DataGrid
 import com.intellij.database.datagrid.DataGridAppearance
+import com.intellij.database.datagrid.DataGridUtil
 import com.intellij.database.datagrid.GridUtil
 import com.intellij.database.editor.TableFileEditor
 import com.intellij.database.run.ui.TableResultPanel
@@ -22,7 +23,7 @@ class SitemapTableFileEditor : TableFileEditor {
         val hookUp = SitemapDocumentDataHookUp(project, file.findDocument()!!)
         myDataGrid = createDataGrid(hookUp) as TableResultPanel
 //        println("myDataGrid $myDataGrid")
-        GridUtil.addGridHeaderComponent(myDataGrid)
+        DataGridUtil.addGridHeaderComponent(myDataGrid)
     }
 
      override fun getState(level: FileEditorStateLevel): FileEditorState {
