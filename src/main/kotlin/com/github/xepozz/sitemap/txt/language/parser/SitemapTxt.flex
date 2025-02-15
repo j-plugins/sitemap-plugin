@@ -5,6 +5,7 @@ import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.TokenType;
 import com.github.xepozz.sitemap.txt.language.psi.SitemapTxtTypes;
 
+//https://westes.github.io/flex/manual/Patterns.html
 %%
 %class SitemapTxtLexer
 %implements FlexLexer
