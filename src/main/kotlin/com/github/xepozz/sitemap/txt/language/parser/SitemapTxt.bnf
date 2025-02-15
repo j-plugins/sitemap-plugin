@@ -1,0 +1,20 @@
+{
+  parserClass = "com.github.xepozz.sitemap.txt.language.parser.SitemapTxtParser"
+
+  extends = "com.intellij.extapi.psi.ASTWrapperPsiElement"
+
+  psiClassPrefix = "SitemapTxt"
+  psiImplClassSuffix="Impl"
+  psiPackage="com.github.xepozz.sitemap.txt.language.psi"
+  psiImplPackage="com.github.xepozz.sitemap.txt.language.psi.impl"
+
+  elementTypeHolderClass="com.github.xepozz.sitemap.txt.language.psi.SitemapTxtTypes"
+  elementTypeClass = "com.github.xepozz.sitemap.txt.language.psi.SitemapTxtElementType"
+  tokenTypeClass = "com.github.xepozz.sitemap.txt.language.psi.SitemapTxtTokenType"
+}
+
+file ::= entry*
+
+private entry ::= url | EOL
+
+url ::= TEXT

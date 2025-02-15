@@ -18,13 +18,23 @@
     <extensions defaultExtensionNs="com.intellij">
         <!-- TXT-->
         <fileType
-                name="Sitemap Text File"
+                name="Sitemap Text"
                 implementationClass="com.github.xepozz.sitemap.txt.SitemapTxtFileType"
                 fieldName="INSTANCE"
-                language="TEXT"
+                language="Sitemap.txt"
                 patterns="*sitemap*.txt"
                 fileNamesCaseInsensitive="sitemap.txt"
         />
+        <lang.parserDefinition
+                language="Sitemap.txt"
+                implementationClass="com.github.xepozz.sitemap.txt.language.SitemapTxtParserDefinition"/>
+        <lang.syntaxHighlighterFactory
+                language="Sitemap.txt"
+                implementationClass="com.github.xepozz.sitemap.txt.language.SitemapTxtSyntaxHighlighterFactory"/>
+        <annotator
+                language="Sitemap.txt"
+                implementationClass="com.github.xepozz.sitemap.txt.language.SitemapTxtAnnotator"/>
+
 
         <!-- XML-->
         <fileType
