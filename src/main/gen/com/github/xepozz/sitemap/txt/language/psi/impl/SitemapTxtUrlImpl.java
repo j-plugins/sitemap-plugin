@@ -10,6 +10,7 @@ import com.intellij.psi.util.PsiTreeUtil;
 import static com.github.xepozz.sitemap.txt.language.psi.SitemapTxtTypes.*;
 import com.intellij.extapi.psi.ASTWrapperPsiElement;
 import com.github.xepozz.sitemap.txt.language.psi.*;
+import com.intellij.psi.PsiReference;
 
 public class SitemapTxtUrlImpl extends ASTWrapperPsiElement implements SitemapTxtUrl {
 
@@ -25,6 +26,16 @@ public class SitemapTxtUrlImpl extends ASTWrapperPsiElement implements SitemapTx
   public void accept(@NotNull PsiElementVisitor visitor) {
     if (visitor instanceof SitemapTxtVisitor) accept((SitemapTxtVisitor)visitor);
     else super.accept(visitor);
+  }
+
+  @Override
+  public @NotNull String getValue() {
+    return SitemapImplUtil.getValue(this);
+  }
+
+  @Override
+  public @NotNull PsiReference @NotNull [] getReferences() {
+    return SitemapImplUtil.getReferences(this);
   }
 
 }

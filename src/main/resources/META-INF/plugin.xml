@@ -35,7 +35,6 @@
                 language="Sitemap.txt"
                 implementationClass="com.github.xepozz.sitemap.txt.language.SitemapTxtAnnotator"/>
 
-
         <!-- XML-->
         <fileType
                 name="Sitemap XML File"

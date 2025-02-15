@@ -11,6 +11,8 @@
   elementTypeHolderClass="com.github.xepozz.sitemap.txt.language.psi.SitemapTxtTypes"
   elementTypeClass = "com.github.xepozz.sitemap.txt.language.psi.SitemapTxtElementType"
   tokenTypeClass = "com.github.xepozz.sitemap.txt.language.psi.SitemapTxtTokenType"
+
+  psiImplUtilClass="com.github.xepozz.sitemap.txt.language.psi.impl.SitemapImplUtil"
 }
 
 file ::= entry*
@@ -18,3 +20,7 @@ file ::= entry*
 private entry ::= url | EOL
 
 url ::= TEXT
+{
+    implements=["com.intellij.psi.PsiLiteralValue"]
+    methods=[getValue getReferences]
+}
