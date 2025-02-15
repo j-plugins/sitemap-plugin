@@ -14,6 +14,8 @@ import com.intellij.openapi.vfs.findDocument
 
 class SitemapTableFileEditor : TableFileEditor {
     private val myDataGrid: TableResultPanel
+    private val hookup
+        get() = myDataGrid.dataHookup as SitemapDocumentDataHookUp
 
     constructor(project: Project, file: VirtualFile) : super(project, file) {
 //        val hookUp = GridDataHookUpManager.getInstance(project).getHookUp(file, MyDataLoader(), this)
@@ -40,6 +42,4 @@ class SitemapTableFileEditor : TableFileEditor {
 
     override fun getDataGrid() = myDataGrid
 
-    private val hookup
-        get() = myDataGrid.dataHookup as SitemapDocumentDataHookUp
 }
