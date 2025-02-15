@@ -39,8 +39,6 @@
                 id="sitemap editor" order="first"
                 implementation="com.github.xepozz.sitemap.editor.SitemapTableFileEditorProvider"/>
 
-        <database.datagrid.valueEditorTab implementation="com.github.xepozz.sitemap.editor.EditorValueEditorTab"/>
-
         <internalFileTemplate name="Sitemap Example"/>
         <internalFileTemplate name="Sitemap Index Example"/>
         <registryKey

@@ -27,19 +27,30 @@ import com.intellij.xml.util.XmlUtil
 
 class SitemapDocumentDataHookUp(project: Project, document: Document, val myVirtualFile: VirtualFile) :
     DocumentDataHookUp(project, document, null) {
-        companion object {
-            val columnLabelsMapping = hashMapOf<String, String>(
-                "loc" to "Location",
-                "lastmod" to "Last modified",
-            )
-        }
+    companion object {
+        val indexColumnLabels = hashMapOf<String, String>(
+            "loc" to "Location",
+            "lastmod" to "Last modified",
+            "changefreq" to "Change frequency",
+            "priority" to "Priority",
+        )
+        val regularColumnLabels = hashMapOf<String, String>(
+            "loc" to "Location",
+            "lastmod" to "Last modified",
+            "changefreq" to "Change frequency",
+            "priority" to "Priority",
+        )
+    }
+
     override fun buildMarkup(
-        p0: CharSequence,
-        p1: GridRequestSource
-    ): DataMarkup? {
+        sequence: CharSequence,
+        requestSource: GridRequestSource
+    ): DataMarkup {
         val columns = mutableListOf<GridColumn>(
-            DataConsumer.Column(0, columnLabelsMapping["loc"], 1, null, null),
-            DataConsumer.Column(1, columnLabelsMapping["lastmod"], 1, null, null),
+            DataConsumer.Column(0, indexColumnLabels["loc"], 1, null, null),
+            DataConsumer.Column(1, indexColumnLabels["lastmod"], 1, null, null),
+            DataConsumer.Column(2, indexColumnLabels["changefreq"], 1, null, null),
+            DataConsumer.Column(3, indexColumnLabels["priority"], 1, null, null),
         )
 
         var index = 0
@@ -48,6 +59,7 @@ class SitemapDocumentDataHookUp(project: Project, document: Document, val myVirt
         val psiFile = ReadAction.compute<XmlFile, Exception> {
             PsiDocumentManager.getInstance(project).getPsiFile(document) as XmlFile
         }
+
         println("build markup ")
         ReadAction.compute<Void, Exception> {
 
@@ -57,18 +69,32 @@ class SitemapDocumentDataHookUp(project: Project, document: Document, val myVirt
                 .forEach {
                     val result = hashMapOf(
                         "loc" to "",
-                        "lastmod" to ""
+                        "lastmod" to "",
+                        "changefreq" to "",
+                        "priority" to "",
                     )
                     for (xmlTag in it.subTags) {
                         result[xmlTag.name] = when (xmlTag.name) {
                             "loc" -> xmlTag.value.text
                             "lastmod" -> xmlTag.value.text
+                            "changefreq" -> xmlTag.value.text
+                            "priority" -> xmlTag.value.text
                             else -> continue
                         }
                     }
 
-                    println("consume ${result}")
-                    rows.add(DataConsumer.Row.create(index, listOf(result["loc"], result["lastmod"]).toTypedArray()))
+//                    println("consume ${result}")
+                    rows.add(
+                        DataConsumer.Row.create(
+                            index,
+                            arrayOf(
+                                result["loc"],
+                                result["lastmod"],
+                                result["changefreq"],
+                                result["priority"]
+                            )
+                        )
+                    )
                     index++
                 }
             null

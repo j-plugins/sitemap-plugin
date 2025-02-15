@@ -27,25 +27,13 @@ import org.jdom.Element
 import java.util.*
 
 class SitemapTableFileEditorProvider : WeighedFileEditorProvider(), DumbAware {
-    override fun getWeight(): Double {
-        println("accept, ${super.getWeight()}")
-        return 10.0
-    }
-    override fun accept(project: Project, file: VirtualFile): Boolean {
-        println("accept, ${file}")
-        return file.extension == "xml" && file.name.contains("sitemap")
-//        return file.fileType == XmlFileType.INSTANCE
-    }
+    override fun getWeight() = 10.0
+
+    override fun accept(project: Project, file: VirtualFile) = file.extension == "xml" && file.name.contains("sitemap")
 
     override fun acceptRequiresReadAction() = false
 
-    override fun createEditor(project: Project, file: VirtualFile): SitemapTableFileEditor {
-        println("createEditor, $file")
-
-        val editor = SitemapTableFileEditor(project, file)
-        val state = ModalityState.current()
-        return editor
-    }
+    override fun createEditor(project: Project, file: VirtualFile) = SitemapTableFileEditor(project, file)
 
     override fun readState(sourceElement: Element, project: Project, file: VirtualFile): FileEditorState {
         var state: FileEditorState? = null
@@ -66,7 +54,7 @@ class SitemapTableFileEditorProvider : WeighedFileEditorProvider(), DumbAware {
     }
 
     override fun getPolicy(): FileEditorPolicy {
-        println("getPolicy, ${Registry.`is`("sitemap.open.as.tables.by.default", true)}")
+//        println("getPolicy, ${Registry.`is`("sitemap.open.as.tables.by.default", true)}")
         // todo change to false by default
         return if (Registry.`is`("sitemap.open.as.tables.by.default", true)) {
             FileEditorPolicy.PLACE_BEFORE_DEFAULT_EDITOR

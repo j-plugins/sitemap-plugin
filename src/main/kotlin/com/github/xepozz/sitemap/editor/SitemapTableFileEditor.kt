@@ -34,7 +34,7 @@ class SitemapTableFileEditor : TableFileEditor, CsvFormatEditor {
 //        val hookUp = GridDataHookUpManager.getInstance(project).getHookUp(file, MyDataLoader(), this)
         val hookUp = SitemapDocumentDataHookUp(project, file.findDocument()!!, file)
         myDataGrid = createDataGrid(hookUp) as TableResultPanel
-        println("myDataGrid $myDataGrid")
+//        println("myDataGrid $myDataGrid")
         GridUtil.addGridHeaderComponent(myDataGrid)
     }
 
@@ -45,7 +45,7 @@ class SitemapTableFileEditor : TableFileEditor, CsvFormatEditor {
     }
 
     protected override fun configure(grid: DataGrid, appearance: DataGridAppearance) {
-        println("configure $grid $appearance")
+//        println("configure $grid $appearance")
         GridUtil.configureCsvTable(grid, appearance)
     }
 

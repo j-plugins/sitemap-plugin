@@ -14,7 +14,7 @@ class SitemapDataMarkup(
     val myPsiFile: XmlFile,
 ) : DocumentDataHookUp.DataMarkup(columns, rows) {
     companion object {
-        val labels = SitemapDocumentDataHookUp.columnLabelsMapping.entries.associate { (key, value) -> value to key }
+        val labels = SitemapDocumentDataHookUp.indexColumnLabels.entries.associate { (key, value) -> value to key }
 
     }
     override fun deleteRows(
