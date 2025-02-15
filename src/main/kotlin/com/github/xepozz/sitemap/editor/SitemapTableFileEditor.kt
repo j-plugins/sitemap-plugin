@@ -1,7 +1,6 @@
 package com.github.xepozz.sitemap.editor
 
 import com.intellij.database.csv.CsvFormat
-import com.intellij.database.csv.CsvFormatEditor
 import com.intellij.database.csv.CsvFormatResolver
 import com.intellij.database.csv.CsvFormatter
 import com.intellij.database.datagrid.CsvDocumentDataHookUp
@@ -27,7 +26,7 @@ import com.intellij.psi.xml.XmlTag
 import com.intellij.util.xmlb.XmlSerializer
 import com.intellij.database.run.ui.TableResultPanel
 
-class SitemapTableFileEditor : TableFileEditor, CsvFormatEditor {
+class SitemapTableFileEditor : TableFileEditor {
     private val myDataGrid: TableResultPanel
 
     constructor(project: Project, file: VirtualFile) : super(project, file) {
@@ -39,7 +38,7 @@ class SitemapTableFileEditor : TableFileEditor, CsvFormatEditor {
     }
 
      override fun getState(level: FileEditorStateLevel): FileEditorState {
-        val hookup = this.hookup
+         this.hookup
 //         println("getState $hookup")
         return FileEditorState.INSTANCE
     }
@@ -57,8 +56,4 @@ class SitemapTableFileEditor : TableFileEditor, CsvFormatEditor {
 
     private val hookup
         get() = myDataGrid.dataHookup as SitemapDocumentDataHookUp
-
-    override fun firstRowIsHeader() = false
-
-    override fun setFirstRowIsHeader(value: Boolean){}
 }

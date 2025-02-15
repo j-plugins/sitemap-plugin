@@ -1,6 +1,5 @@
 package com.github.xepozz.sitemap.editor
 
-import com.intellij.database.datagrid.DataConsumer
 import com.intellij.database.datagrid.DocumentDataHookUp
 import com.intellij.database.datagrid.GridColumn
 import com.intellij.database.datagrid.GridRequestSource
@@ -14,8 +13,7 @@ import com.intellij.psi.xml.XmlFile
 
 class SitemapDocumentDataHookUp(project: Project, document: Document, val myVirtualFile: VirtualFile) :
     DocumentDataHookUp(project, document, null) {
-    companion object {
-    }
+    companion object;
 
     override fun buildMarkup(
         sequence: CharSequence,

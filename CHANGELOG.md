@@ -2,6 +2,6 @@
 
 # Sitemap Changelog
 
-## [2025.0.1]
+## Unreleased
 
 - Introduced table editor
