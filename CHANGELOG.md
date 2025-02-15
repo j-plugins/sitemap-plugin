@@ -2,6 +2,6 @@
 
 # Sitemap Changelog
 
-## [Unreleased]
-### Added
-- Initial scaffold created from [IntelliJ Platform Plugin Template](https://github.com/JetBrains/intellij-platform-plugin-template)
+## [2025.0.1]
+
+- Introduced table editor
