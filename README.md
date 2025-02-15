@@ -12,7 +12,7 @@
 Sitemap assistant features:
 
 - Syntax support
-- Advanced editor
+- Advanced table editor
 - Google suggestions
 - Ability to push the sitemap
 
