@@ -2,29 +2,16 @@ package com.github.xepozz.sitemap.editor
 
 import com.intellij.configurationStore.deserialize
 import com.intellij.configurationStore.serializeObjectInto
-import com.intellij.database.csv.*
-import com.intellij.ide.highlighter.XmlFileType
-import com.intellij.openapi.application.ApplicationManager
-import com.intellij.openapi.application.ModalityState
-import com.intellij.openapi.fileEditor.AsyncFileEditorProvider
+import com.intellij.database.csv.CsvFormatResolver
 import com.intellij.openapi.fileEditor.FileEditorPolicy
-import com.intellij.openapi.fileEditor.FileEditorProvider
 import com.intellij.openapi.fileEditor.FileEditorState
 import com.intellij.openapi.fileEditor.WeighedFileEditorProvider
-import com.intellij.openapi.fileEditor.ex.FileEditorManagerEx
-import com.intellij.openapi.fileEditor.ex.FileEditorProviderManager
-import com.intellij.openapi.fileEditor.impl.EditorComposite
-import com.intellij.openapi.fileEditor.impl.EditorWindow
-import com.intellij.openapi.fileTypes.FileTypeRegistry
-import com.intellij.openapi.progress.util.BackgroundTaskUtil
 import com.intellij.openapi.project.DumbAware
 import com.intellij.openapi.project.Project
 import com.intellij.openapi.util.registry.Registry
 import com.intellij.openapi.vfs.VirtualFile
 import com.intellij.serialization.SerializationException
-import com.intellij.util.containers.ContainerUtil
 import org.jdom.Element
-import java.util.*
 
 class SitemapTableFileEditorProvider : WeighedFileEditorProvider(), DumbAware {
     override fun getWeight() = 10.0
