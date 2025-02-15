@@ -1,4 +1,4 @@
-package com.github.xepozz.sitemap.editor
+package com.github.xepozz.sitemap.xml.editor
 
 import com.intellij.database.datagrid.DocumentDataHookUp
 import com.intellij.database.datagrid.GridRequestSource

@@ -37,7 +37,7 @@
         />
         <fileEditorProvider
                 id="sitemap editor" order="first"
-                implementation="com.github.xepozz.sitemap.editor.SitemapTableFileEditorProvider"/>
+                implementation="com.github.xepozz.sitemap.xml.editor.SitemapTableFileEditorProvider"/>
 
         <internalFileTemplate name="Sitemap Example"/>
         <internalFileTemplate name="Sitemap Index Example"/>
