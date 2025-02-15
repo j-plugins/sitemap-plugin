@@ -16,8 +16,19 @@
     <resource-bundle>messages.MyBundle</resource-bundle>
 
     <extensions defaultExtensionNs="com.intellij">
+        <!-- TXT-->
         <fileType
-                name="Sitemap File"
+                name="Sitemap Text File"
+                implementationClass="com.github.xepozz.sitemap.txt.SitemapTxtFileType"
+                fieldName="INSTANCE"
+                language="TEXT"
+                patterns="*sitemap*.txt"
+                fileNamesCaseInsensitive="sitemap.txt"
+        />
+
+        <!-- XML-->
+        <fileType
+                name="Sitemap XML File"
                 implementationClass="com.github.xepozz.sitemap.SitemapFileType"
                 fieldName="INSTANCE"
                 language="XML"
@@ -30,8 +41,18 @@
 
         <database.datagrid.valueEditorTab implementation="com.github.xepozz.sitemap.editor.EditorValueEditorTab"/>
 
+        <internalFileTemplate name="Sitemap Example"/>
+        <internalFileTemplate name="Sitemap Index Example"/>
         <registryKey
                 key="sitemap.open.as.tables.by.default" defaultValue="true"
                 description="Show sitemap as a table by default"/>
     </extensions>
+
+    <actions>
+        <action class="com.github.xepozz.sitemap.xml.SitemapFileAction"
+                id="com.github.xepozz.sitemap.xml.SitemapFileAction"
+                icon="/icons/sitemap/pluginIcon.svg">
+            <add-to-group group-id="NewWebDevelopment" anchor="last"/>
+        </action>
+    </actions>
 </idea-plugin>

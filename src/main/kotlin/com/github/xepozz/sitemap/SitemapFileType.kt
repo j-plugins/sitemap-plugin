@@ -5,9 +5,9 @@ import com.intellij.openapi.fileTypes.LanguageFileType
 import java.io.Serializable
 
 class SitemapFileType private constructor() : LanguageFileType(XMLLanguage.INSTANCE), Serializable {
-    override fun getName() = "Sitemap File"
+    override fun getName() = "Sitemap XML File"
 
-    override fun getDescription() = "Sitemap description file"
+    override fun getDescription() = "Sitemap.xml description file"
 
     override fun getDefaultExtension() = "xml"
 
