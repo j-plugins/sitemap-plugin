@@ -4,14 +4,9 @@
     <name>Sitemap</name>
     <vendor email="xepozz@list.ru" url="https://github.com/xepozz">Dmitrii Derepko (@xepozz)</vendor>
 
-<!--    <depends>com.intellij.modules.platform</depends>-->
-<!--    <depends>com.intellij.modules.database</depends>-->
-<!--    <depends>intellij.grid.types</depends>-->
     <dependencies>
-<!--        <module name="intellij.grid.types"/>-->
-<!--        <plugin id="intellij.grid.impl" />-->
-        <plugin id="com.intellij.modules.platform" />
-        <plugin id="com.intellij.modules.database" />
+        <plugin id="com.intellij.modules.platform"/>
+        <plugin id="com.intellij.modules.database"/>
     </dependencies>
     <resource-bundle>messages.MyBundle</resource-bundle>
 
@@ -23,8 +18,7 @@
                 fieldName="INSTANCE"
                 language="Sitemap.txt"
                 patterns="*sitemap*.txt"
-                fileNamesCaseInsensitive="sitemap.txt"
-        />
+                fileNamesCaseInsensitive="sitemap.txt"/>
         <lang.parserDefinition
                 language="Sitemap.txt"
                 implementationClass="com.github.xepozz.sitemap.txt.language.SitemapTxtParserDefinition"/>
@@ -42,8 +36,7 @@
                 fieldName="INSTANCE"
                 language="XML"
                 patterns="*sitemap*.xml"
-                fileNamesCaseInsensitive="sitemap.xml"
-        />
+                fileNamesCaseInsensitive="sitemap.xml"/>
         <fileEditorProvider
                 id="sitemap editor" order="first"
                 implementation="com.github.xepozz.sitemap.xml.editor.SitemapTableFileEditorProvider"/>

@@ -7,6 +7,8 @@
 ## Template ToDo list
 <!-- Plugin description -->
 
+[Github](https://github.com/xepozz/sitemap-intellij-plugin) | [Telegram](https://t.me/jb_plugins/27) | [Donation](https://github.com/xepozz/xepozz?tab=readme-ov-file#become-a-sponsor)
+
 ## Sitemap
 
 Sitemap assistant features:
