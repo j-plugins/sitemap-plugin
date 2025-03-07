@@ -15,7 +15,6 @@
         <fileType
                 name="Sitemap Text"
                 implementationClass="com.github.xepozz.sitemap.txt.SitemapTxtFileType"
-                fieldName="INSTANCE"
                 language="Sitemap.txt"
                 patterns="*sitemap*.txt"
                 fileNamesCaseInsensitive="sitemap.txt"/>

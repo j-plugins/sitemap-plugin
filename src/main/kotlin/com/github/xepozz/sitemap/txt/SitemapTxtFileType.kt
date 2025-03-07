@@ -10,6 +10,7 @@ class SitemapTxtFileType private constructor() : LanguageFileType(SitemapTxtLang
     override fun getDescription() = "Sitemap.txt description file"
     override fun getDefaultExtension() = "txt"
     override fun getIcon() = SitemapIcons.FILE
+
     companion object {
         @JvmStatic
         val INSTANCE = SitemapTxtFileType()
