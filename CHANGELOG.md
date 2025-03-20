@@ -4,6 +4,6 @@
 
 ## [Unreleased]
 
-## [2025.0.8] - 2025-03-15
+## [2025.0.9] - 2025-03-20
 
 - Introduced table editor
