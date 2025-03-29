@@ -7,3 +7,6 @@
 ## [2025.0.10] - 2025-03-29
 
 - Introduced table editor
+
+[Unreleased]: https://github.com/xepozz/sitemap-plugin/compare/v2025.0.10...HEAD
+[2025.0.10]: https://github.com/xepozz/sitemap-plugin/commits/v2025.0.10
