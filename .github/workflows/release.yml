@@ -31,7 +31,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           # Access current version from gradle.properties
-          CURRENT_VERSION=$(grep "pluginVersion=" gradle.properties | cut -d'=' -f2)
+          CURRENT_VERSION=$(grep "pluginVersion.=" gradle.properties | cut -d'=' -f2)
           
           # Splitting version
           IFS='.' read -r MAJOR MINOR PATCH <<< "$CURRENT_VERSION"
