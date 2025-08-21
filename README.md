@@ -1,13 +1,13 @@
 # Sitemap
 
-![Build](https://github.com/xepozz/sitemap-plugin/workflows/Build/badge.svg)
+![Build](https://github.com/j-plugins/sitemap-plugin/workflows/Build/badge.svg)
 [![Version](https://img.shields.io/jetbrains/plugin/v/MARKETPLACE_ID.svg)](https://plugins.jetbrains.com/plugin/MARKETPLACE_ID)
 [![Downloads](https://img.shields.io/jetbrains/plugin/d/MARKETPLACE_ID.svg)](https://plugins.jetbrains.com/plugin/MARKETPLACE_ID)
 
 ## Template ToDo list
 <!-- Plugin description -->
 
-[Github](https://github.com/xepozz/sitemap-intellij-plugin) | [Telegram](https://t.me/jb_plugins/27) | [Donation](https://github.com/xepozz/xepozz?tab=readme-ov-file#become-a-sponsor)
+[Github](https://github.com/j-plugins/sitemap-plugin) | [Telegram](https://t.me/jb_plugins/27) | [Donation](https://github.com/xepozz/xepozz?tab=readme-ov-file#become-a-sponsor)
 
 ## Sitemap
 

@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?><?xml-stylesheet type="text/xsl" href="https://victorious.com/sitemaps_xsl.xsl"?>
+<sitemapindex xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/siteindex.xsd"
+              xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+    <sitemap>
+        <loc>https://victorious.com/page-sitemap1.xml</loc>
+        <lastmod>2025-02-13T21:09:00+00:00</lastmod>
+    </sitemap>
+    <sitemap>
+        <loc>https://victorious.com/customers-sitemap1.xml</loc>
+        <lastmod>2025-02-13T18:41:07+00:00</lastmod>
+    </sitemap>
+    <sitemap>
+        <loc>https://victorious.com/resource-sitemap1.xml</loc>
+        <lastmod>2025-02-12T17:11:28+00:00</lastmod>
+    </sitemap>
+    <sitemap>
+        <loc>https://victorious.com/who-we-serve-sitemap1.xml</loc>
+        <lastmod>2025-02-07T15:04:46+00:00</lastmod>
+    </sitemap>
+    <sitemap>
+        <loc>https://victorious.com/resource-type-sitemap1.xml</loc>
+        <lastmod>666</lastmod>
+        <changefreq>5</changefreq>
+    </sitemap>
+</sitemapindex>

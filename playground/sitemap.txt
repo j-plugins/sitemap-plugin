@@ -1,0 +1,6 @@
+https://site.com/bing-sitemap.xml
+https://site.com/
+/bing-sitemap.xml
+/bing-sitemap
+
+/bing-sitemap

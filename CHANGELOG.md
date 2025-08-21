@@ -8,5 +8,5 @@
 
 - Introduced table editor
 
-[Unreleased]: https://github.com/xepozz/sitemap-plugin/compare/v2025.0.10...HEAD
-[2025.0.10]: https://github.com/xepozz/sitemap-plugin/commits/v2025.0.10
+[Unreleased]: https://github.com/j-plugins/sitemap-plugin/compare/v2025.0.10...HEAD
+[2025.0.10]: https://github.com/j-plugins/sitemap-plugin/commits/v2025.0.10
