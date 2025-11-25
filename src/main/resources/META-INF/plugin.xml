@@ -9,6 +9,7 @@
         <plugin id="com.intellij.modules.database"/>
     </dependencies>
     <resource-bundle>messages.MyBundle</resource-bundle>
+    <resource-bundle>messages.SitemapBundle</resource-bundle>
 
     <extensions defaultExtensionNs="com.intellij">
         <!-- TXT-->
