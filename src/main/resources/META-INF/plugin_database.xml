@@ -1,0 +1,12 @@
+<!-- Plugin Configuration File. Read more: https://plugins.jetbrains.com/docs/intellij/plugin-configuration-file.html -->
+<idea-plugin>
+    <extensions defaultExtensionNs="com.intellij">
+        <!-- XML-->
+        <fileEditorProvider
+                id="sitemap editor" order="first"
+                implementation="com.github.xepozz.sitemap.xml.editor.SitemapTableFileEditorProvider"/>
+        <registryKey
+                key="sitemap.open.as.tables.by.default" defaultValue="true"
+                description="Show sitemap as a table by default"/>
+    </extensions>
+</idea-plugin>

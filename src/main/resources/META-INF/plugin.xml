@@ -6,9 +6,8 @@
 
     <dependencies>
         <plugin id="com.intellij.modules.platform"/>
-        <plugin id="com.intellij.modules.database"/>
     </dependencies>
-    <resource-bundle>messages.MyBundle</resource-bundle>
+    <depends optional="true" config-file="plugin_database.xml">com.intellij.modules.database</depends>
     <resource-bundle>messages.SitemapBundle</resource-bundle>
 
     <extensions defaultExtensionNs="com.intellij">
@@ -37,15 +36,9 @@
                 language="XML"
                 patterns="*sitemap*.xml"
                 fileNamesCaseInsensitive="sitemap.xml"/>
-        <fileEditorProvider
-                id="sitemap editor" order="first"
-                implementation="com.github.xepozz.sitemap.xml.editor.SitemapTableFileEditorProvider"/>
 
         <internalFileTemplate name="Sitemap Example"/>
         <internalFileTemplate name="Sitemap Index Example"/>
-        <registryKey
-                key="sitemap.open.as.tables.by.default" defaultValue="true"
-                description="Show sitemap as a table by default"/>
     </extensions>
 
     <actions>
