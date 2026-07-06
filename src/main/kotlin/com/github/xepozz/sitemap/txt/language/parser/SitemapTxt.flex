@@ -16,13 +16,13 @@ import com.github.xepozz.sitemap.txt.language.psi.SitemapTxtTypes;
 %eof}
 
 
-NEWLINE=\r|\n|\r\n
+NEWLINE=\r\n|\r|\n
 WHITESPACE=[ \t]+
 
 %%
 
 <YYINITIAL> {
-    [^\s][^\n]*   { return SitemapTxtTypes.TEXT; }
+    [^\s\r\n][^\r\n]*   { return SitemapTxtTypes.TEXT; }
 }
 
 {WHITESPACE}      { return TokenType.WHITE_SPACE; }

@@ -8,7 +8,6 @@ import com.intellij.database.datagrid.GridHelperImpl
 import com.intellij.database.editor.TableFileEditor
 import com.intellij.database.extractors.BaseObjectFormatter
 import com.intellij.database.extractors.FormatterCreator
-import com.intellij.database.run.ui.TableResultPanel
 import com.intellij.database.run.ui.grid.editors.FormatsCache
 import com.intellij.database.run.ui.grid.editors.GridCellEditorFactoryImpl
 import com.intellij.database.run.ui.grid.editors.GridCellEditorFactoryProvider
@@ -22,9 +21,9 @@ import com.intellij.database.settings.DataGridAppearanceSettings
 import com.intellij.openapi.actionSystem.ActionGroup
 import com.intellij.openapi.actionSystem.ActionManager
 import com.intellij.openapi.actionSystem.EmptyActionGroup
+import com.intellij.openapi.editor.Document
 import com.intellij.openapi.project.Project
 import com.intellij.openapi.vfs.VirtualFile
-import com.intellij.openapi.vfs.findDocument
 import com.intellij.ui.components.TwoSideComponent
 import com.intellij.util.ui.JBUI
 import com.intellij.util.ui.JBUI.CurrentTheme
@@ -35,18 +34,15 @@ import javax.swing.border.Border
 import javax.swing.border.CompoundBorder
 
 class SitemapTableFileEditor : TableFileEditor {
-    private val myDataGrid: TableResultPanel
+    private val myDataGrid: DataGrid
 
-    constructor(project: Project, file: VirtualFile) : super(project, file) {
-//        val hookUp = GridDataHookUpManager.getInstance(project).getHookUp(file, MyDataLoader(), this)
-        val hookUp = SitemapDocumentDataHookUp(project, file.findDocument()!!)
-        myDataGrid = createDataGrid(hookUp) as TableResultPanel
-//        println("myDataGrid $myDataGrid")
+    constructor(project: Project, file: VirtualFile, document: Document) : super(project, file) {
+        val hookUp = SitemapDocumentDataHookUp(project, document)
+        myDataGrid = createDataGrid(hookUp)
         addGridHeaderComponent(myDataGrid)
     }
 
     protected override fun configure(grid: DataGrid, appearance: DataGridAppearance) {
-//        println("configure $grid $appearance")
         configureTableEditor(grid, appearance)
     }
 
@@ -91,10 +87,15 @@ private fun addGridHeaderComponent(
     secondaryActionsGroupName: String
 ): JComponent {
     val actionManager = ActionManager.getInstance()
-    val actions =
-        (if (actionGroupName == null) EmptyActionGroup() else actionManager.getAction(actionGroupName) as ActionGroup?) as ActionGroup
-    val secondaryActions = actionManager.getAction(secondaryActionsGroupName) as ActionGroup
+    val actions = actionGroup(actionManager, actionGroupName)
+    val secondaryActions = actionGroup(actionManager, secondaryActionsGroupName)
     return addGridHeaderComponent(dataGrid, transparent, actions, secondaryActions)
+}
+
+private fun actionGroup(actionManager: ActionManager, actionGroupName: String?): ActionGroup {
+    return actionGroupName
+        ?.let { actionManager.getAction(it) as? ActionGroup }
+        ?: EmptyActionGroup()
 }
 
 private fun addGridHeaderComponent(

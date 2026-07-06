@@ -514,7 +514,10 @@ class SitemapTxtLexer implements FlexLexer {
       else {
         switch (zzAction < 0 ? zzAction : ZZ_ACTION[zzAction]) {
           case 1:
-            { return SitemapTxtTypes.TEXT;
+            { if (zzMarkedPos > zzStartRead && zzBuffer.charAt(zzMarkedPos - 1) == '\r') {
+                zzMarkedPos--;
+              }
+              return SitemapTxtTypes.TEXT;
             }
           // fall through
           case 4: break;

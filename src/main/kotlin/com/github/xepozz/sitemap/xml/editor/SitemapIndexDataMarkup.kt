@@ -17,61 +17,72 @@ class SitemapIndexDataMarkup(
     rows: List<GridRow>,
     val myPsiFile: XmlFile,
     val subTagName: String,
+    private val fieldKeys: List<String>,
 ) : DocumentDataHookUp.DataMarkup(columns, rows) {
     companion object {
-        val columnLabels = hashMapOf<String, String>(
+        internal val columnLabels = linkedMapOf(
             "loc" to "Location",
             "lastmod" to "Last modified",
             "changefreq" to "Change frequency",
             "priority" to "Priority",
         )
-        val labels = columnLabels.entries.associate { (key, value) -> value to key }
-        fun build(project: Project, document: Document, isIndex: Boolean): DocumentDataHookUp.DataMarkup {
-            val columns = mutableListOf<GridColumn>(
-                DataConsumer.Column(0, columnLabels["loc"], 1, null, null),
-                DataConsumer.Column(1, columnLabels["lastmod"], 1, null, null),
-                DataConsumer.Column(2, columnLabels["changefreq"], 1, null, null),
-                DataConsumer.Column(3, columnLabels["priority"], 1, null, null),
-            )
+
+        internal val urlSetFieldKeys = listOf("loc", "lastmod", "changefreq", "priority")
+        internal val sitemapIndexFieldKeys = listOf("loc", "lastmod")
+
+        private val labels = columnLabels.entries.associate { (key, value) -> value to key }
+
+        internal fun fieldKeysFor(isIndex: Boolean) = if (isIndex) sitemapIndexFieldKeys else urlSetFieldKeys
+
+        internal fun deletionOrder(indices: Iterable<Int>) = indices.sortedDescending()
+
+        internal fun cellText(value: Any?) = value?.toString().orEmpty()
+
+        internal fun isIndexRoot(rootName: String): Boolean? = when (rootName) {
+            "sitemapindex" -> true
+            "urlset" -> false
+            else -> null
+        }
+
+        fun build(project: Project, document: Document): DocumentDataHookUp.DataMarkup? {
+            val psiFile = getPsiFile(project, document) ?: return null
+            val isIndex = ReadAction.compute<Boolean?, Exception> {
+                psiFile.rootTag?.localName?.let(::isIndexRoot)
+            } ?: return null
+
+            return build(psiFile, isIndex)
+        }
+
+        fun build(project: Project, document: Document, isIndex: Boolean): DocumentDataHookUp.DataMarkup? {
+            val psiFile = getPsiFile(project, document) ?: return null
+            return build(psiFile, isIndex)
+        }
+
+        private fun build(psiFile: XmlFile, isIndex: Boolean): DocumentDataHookUp.DataMarkup {
+            val fieldKeys = fieldKeysFor(isIndex)
+            val columns = fieldKeys.mapIndexed { index, fieldKey ->
+                DataConsumer.Column(index, columnLabels.getValue(fieldKey), 1, null, null)
+            }
 
             var index = 0
             val rows = mutableListOf<GridRow>()
 
-            val psiFile = getPsiFile(project, document)
-
             val subTagName = if (isIndex) "sitemap" else "url"
 
-            println("build markup ")
             ReadAction.compute<Void, Exception> {
                 psiFile.rootTag
                     ?.findSubTags(subTagName)
                     ?.forEach {
-                        val result = hashMapOf(
-                            "loc" to "",
-                            "lastmod" to "",
-                            "changefreq" to "",
-                            "priority" to "",
-                        )
+                        val result = fieldKeys.associateWith { "" }.toMutableMap()
                         for (xmlTag in it.subTags) {
-                            result[xmlTag.name] = when (xmlTag.name) {
-                                "loc" -> xmlTag.value.text
-                                "lastmod" -> xmlTag.value.text
-                                "changefreq" -> xmlTag.value.text
-                                "priority" -> xmlTag.value.text
-                                else -> continue
-                            }
+                            if (xmlTag.name !in fieldKeys) continue
+                            result[xmlTag.name] = xmlTag.value.text
                         }
 
-//                    println("consume ${result}")
                         rows.add(
                             DataConsumer.Row.create(
                                 index,
-                                arrayOf(
-                                    result["loc"],
-                                    result["lastmod"],
-                                    result["changefreq"],
-                                    result["priority"]
-                                )
+                                fieldKeys.map { result[it] }.toTypedArray()
                             )
                         )
                         index++
@@ -79,15 +90,15 @@ class SitemapIndexDataMarkup(
                 null
             }
 
-            return SitemapIndexDataMarkup(columns, rows, psiFile, subTagName)
+            return SitemapIndexDataMarkup(columns, rows, psiFile, subTagName, fieldKeys)
         }
 
         private fun getPsiFile(
             project: Project,
             document: Document
-        ): XmlFile {
-            return ReadAction.compute<XmlFile, Exception> {
-                PsiDocumentManager.getInstance(project).getPsiFile(document) as XmlFile
+        ): XmlFile? {
+            return ReadAction.compute<XmlFile?, Exception> {
+                PsiDocumentManager.getInstance(project).getPsiFile(document) as? XmlFile
             }
         }
     }
@@ -99,13 +110,10 @@ class SitemapIndexDataMarkup(
         val psiFile = myPsiFile
 
         com.intellij.openapi.command.WriteCommandAction.runWriteCommandAction(psiFile.project) {
-            rows.forEach { row ->
-                val index = GridRow.toRealIdx(row)
-                val xmlTag = psiFile.rootTag
-                    ?.subTags
-                    ?.get(index) ?: return@forEach
-                xmlTag.delete()
-            }
+            val subTags = psiFile.rootTag?.findSubTags(subTagName) ?: return@runWriteCommandAction
+            deletionOrder(rows.map { GridRow.toRealIdx(it) })
+                .mapNotNull { subTags.getOrNull(it) }
+                .forEach { it.delete() }
         }
 
         return true
@@ -113,14 +121,11 @@ class SitemapIndexDataMarkup(
 
     override fun insertRow(session: DocumentDataHookUp.UpdateSession): Boolean {
         val psiFile = myPsiFile
-        val rootTag = psiFile.rootTag!!
+        val rootTag = psiFile.rootTag ?: return false
 
         com.intellij.openapi.command.WriteCommandAction.runWriteCommandAction(psiFile.project) {
-//            println("rootTag after: ${rootTag.text}")
             val newChild = rootTag.createChildTag(subTagName, rootTag.namespace, "", true)
-//            println("new child: ${newChild}")
             rootTag.addSubTag(newChild, false)
-//            println("rootTag after: ${rootTag.text}")
         }
 
         return true
@@ -131,20 +136,16 @@ class SitemapIndexDataMarkup(
         row: GridRow
     ): Boolean {
         val psiFile = myPsiFile
-        val rootTag = psiFile.rootTag!!
+        val rootTag = psiFile.rootTag ?: return false
 
         com.intellij.openapi.command.WriteCommandAction.runWriteCommandAction(psiFile.project) {
-//            println("rootTag after: ${rootTag.text}")
-            val newChild = rootTag.createChildTag(subTagName, "", "", true)
-            newChild.apply {
-                add(createChildTag("loc", "", row.getValue(0) as? String ?: "", true))
-                add(createChildTag("lastmod", "", row.getValue(1) as? String ?: "", true))
-                add(createChildTag("changefreq", "", row.getValue(2) as? String ?: "", true))
-                add(createChildTag("priority", "", row.getValue(3) as? String ?: "", true))
+            val newChild = rootTag.createChildTag(subTagName, rootTag.namespace, "", true)
+            fieldKeys.forEachIndexed { index, fieldKey ->
+                newChild.add(
+                    newChild.createChildTag(fieldKey, newChild.namespace, cellText(row.getValue(index)), true)
+                )
             }
-//            println("new child: ${newChild}")
             rootTag.addSubTag(newChild, false)
-//            println("rootTag after: ${rootTag.text}")
         }
 
         return true
@@ -158,43 +159,28 @@ class SitemapIndexDataMarkup(
 
         com.intellij.openapi.command.WriteCommandAction.runWriteCommandAction(psiFile.project) {
             mutations.forEach { mutated ->
-
                 val row = mutated.row
-                println("row: $row")
                 val index = GridRow.toRealIdx(row)
-                println("index: $index")
 
                 val xmlTag = psiFile.rootTag
-                    ?.subTags
-                    ?.get(index) ?: return@forEach
+                    ?.findSubTags(subTagName)
+                    ?.getOrNull(index) ?: return@forEach
 
-                println("xmlTag before: ${xmlTag.text}")
-
-                val data = mutated.data
-                println("data $data")
                 for (queryData in mutated.data) {
-//                    val loc = row.getValue(queryData.column.columnNumber) as String
                     val columnName = queryData.column.name
-                    println("columnName: ${columnName}")
-                    val value = queryData.`object` as String
-                    println("value: ${value}")
-
                     val attributeName = labels[columnName]
-                    println("attributeName: ${attributeName}")
+                        ?.takeIf { it in fieldKeys }
+                        ?: continue
+                    val value = cellText(queryData.`object`)
 
                     val attribute = xmlTag.findFirstSubTag(attributeName)
                     if (attribute != null) {
-                        println("attribute: ${attribute}")
-
                         attribute.value.text = value
                     } else {
                         val newChild = xmlTag.createChildTag(attributeName, xmlTag.namespace, value, true)
-                        println("new child: ${newChild}")
                         xmlTag.addSubTag(newChild, false)
                     }
                 }
-
-                println("xmlTag after: ${xmlTag.text}")
             }
         }
 

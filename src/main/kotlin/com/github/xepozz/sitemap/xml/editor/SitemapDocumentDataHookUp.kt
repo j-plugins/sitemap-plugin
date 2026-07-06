@@ -10,9 +10,5 @@ class SitemapDocumentDataHookUp(project: Project, document: Document) :
     override fun buildMarkup(
         sequence: CharSequence,
         requestSource: GridRequestSource
-    ) = when {
-        sequence.contains("<sitemapindex") -> SitemapIndexDataMarkup.build(project, document, true)
-        sequence.contains("<urlset") -> SitemapIndexDataMarkup.build(project, document, false)
-        else -> null
-    }
+    ) = SitemapIndexDataMarkup.build(project, document)
 }
